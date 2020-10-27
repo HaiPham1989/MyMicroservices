@@ -1,7 +1,7 @@
 ﻿namespace Ordering.Core.Entities.Base
 {
-    public abstract class Entity : EntityBase<int>
+    interface IEntityBase<TId>
     {
-
+        TId Id { get; }
     }
 }
