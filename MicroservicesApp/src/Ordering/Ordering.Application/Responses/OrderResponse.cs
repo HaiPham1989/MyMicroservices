@@ -1,9 +1,12 @@
-﻿using Ordering.Core.Entities.Base;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace Ordering.Core.Entities
+namespace Ordering.Application.Responses
 {
-    public class Order : Entity
+    public class OrderResponse
     {
+        public int Id { get; set; }
         public string UserName { get; set; }
         public decimal TotalPrice { get; set; }
 

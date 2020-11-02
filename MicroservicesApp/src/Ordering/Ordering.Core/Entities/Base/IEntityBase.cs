@@ -1,6 +1,6 @@
 ﻿namespace Ordering.Core.Entities.Base
 {
-    interface IEntityBase<TId>
+    public interface IEntityBase<TId>
     {
         TId Id { get; }
     }
