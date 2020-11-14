@@ -46,7 +46,7 @@ namespace Ordering.Infastructure.Migrations
                     b.Property<string>("Expiration")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FristName")
+                    b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")

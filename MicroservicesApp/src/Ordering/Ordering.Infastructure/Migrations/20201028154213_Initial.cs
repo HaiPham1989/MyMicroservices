@@ -14,7 +14,7 @@ namespace Ordering.Infastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserName = table.Column<string>(nullable: true),
                     TotalPrice = table.Column<decimal>(nullable: false),
-                    FristName = table.Column<string>(nullable: true),
+                    FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     EmailAddress = table.Column<string>(nullable: true),
                     AddressLine = table.Column<string>(nullable: true),

@@ -40,7 +40,7 @@ namespace Ordering.Infastructure.Data
         {
             return new List<Order>
             {
-                new Order(){UserName = "haipt", FristName="Thanh Hai", LastName="Pham", EmailAddress="haipt4789@gmail.com", AddressLine="Ha Noi", Country="Viet Nam"}
+                new Order(){UserName = "haipt", FirstName="Thanh Hai", LastName="Pham", EmailAddress="haipt4789@gmail.com", AddressLine="Ha Noi", Country="Viet Nam"}
             };
         }
     }
