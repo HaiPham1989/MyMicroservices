@@ -1,5 +1,6 @@
 using AutoMapper;
 using EventBusRabbitMQ;
+using IntegrationEventLogEF.Services;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -17,6 +18,8 @@ using Ordering.Infastructure.Data;
 using Ordering.Infastructure.Repositories;
 using Ordering.Infastructure.Repositories.Base;
 using RabbitMQ.Client;
+using System;
+using System.Data.Common;
 using System.Reflection;
 
 namespace Ordering.API
@@ -73,6 +76,9 @@ namespace Ordering.API
             });
 
             services.AddSingleton<EventBusRabbitMQConsumer>();
+
+            services.AddTransient<Func<DbConnection, IIntegrationEventLogService>>(
+                sp => (DbConnection c) => new IntegrationEventLogService(c));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

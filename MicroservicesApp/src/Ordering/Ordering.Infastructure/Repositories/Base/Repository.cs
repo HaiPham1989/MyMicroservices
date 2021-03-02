@@ -1,9 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using EventBus.Events;
+using IntegrationEventLogEF.Services;
+using IntegrationEventLogEF.Utilities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Ordering.Core.Entities.Base;
 using Ordering.Core.Repositories.Base;
 using Ordering.Infastructure.Data;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -13,10 +18,14 @@ namespace Ordering.Infastructure.Repositories.Base
     public class Repository<T> : IRepository<T> where T : Entity
     {
         protected readonly OrderContext _dbContext;
+        private readonly IIntegrationEventLogService _eventLogService;
+        private readonly Func<DbConnection, IIntegrationEventLogService> _integrationEventLogServiceFactory;
 
-        public Repository(OrderContext dbContext)
+        public Repository(OrderContext dbContext, Func<DbConnection, IIntegrationEventLogService> integrationEventLogServiceFactory)
         {
             _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+            _integrationEventLogServiceFactory = integrationEventLogServiceFactory ?? throw new ArgumentNullException(nameof(integrationEventLogServiceFactory));
+            _eventLogService = _integrationEventLogServiceFactory(_dbContext.Database.GetDbConnection());
         }
 
         public async Task<IReadOnlyList<T>> GetAllAsync()
@@ -63,10 +72,17 @@ namespace Ordering.Infastructure.Repositories.Base
             return await _dbContext.Set<T>().FindAsync(id);
         }
 
-        public async Task<T> AddAsync(T entity)
+        public async Task<T> AddAsync(T entity, IntegrationEvent evt)
         {
             _dbContext.Set<T>().Add(entity);
-            await _dbContext.SaveChangesAsync();
+
+            await ResilientTransaction.New(_dbContext).ExecuteAsync(async () =>
+            {
+                await _dbContext.SaveChangesAsync();
+                await _eventLogService.SaveEventAsync(evt, _dbContext.Database.CurrentTransaction);
+            });
+
+            //await _dbContext.SaveChangesAsync();
             return entity;
         }
 

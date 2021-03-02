@@ -1,4 +1,5 @@
-﻿using Ordering.Core.Entities.Base;
+﻿using EventBus.Events;
+using Ordering.Core.Entities.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace Ordering.Core.Repositories.Base
                                 List<Expression<Func<T, object>>> includes = null,
                                 bool disableTracking = true);
         Task<T> GetByIdAsync(int id);
-        Task<T> AddAsync(T entity);
+        Task<T> AddAsync(T entity, IntegrationEvent evt);
         Task UpdateAsync(T entity);
         Task DeleteAsync(T entity);
     }
