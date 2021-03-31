@@ -20,6 +20,7 @@ namespace Ordering.API.Controllers
         {
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
             var f = 1;
+            var g = 2;
         }
 
         [HttpGet]
