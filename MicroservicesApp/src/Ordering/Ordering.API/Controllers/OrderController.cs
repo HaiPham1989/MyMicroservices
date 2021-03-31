@@ -29,6 +29,7 @@ namespace Ordering.API.Controllers
             var a = 1;
             var orders = await _mediator.Send(query);
             var b = 2;
+            var c = 3;
             return Ok(orders);
         }
 
