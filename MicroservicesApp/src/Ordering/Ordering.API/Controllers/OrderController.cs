@@ -31,6 +31,9 @@ namespace Ordering.API.Controllers
             var b = 2;
             var c = 3;
             var d = 3;
+            var e = 3;
+            var f = 3;
+            var t = 3;
             return Ok(orders);
         }
 
