@@ -28,6 +28,7 @@ namespace Ordering.API.Controllers
             var query = new GetOrderByUserNameQuery(userName);
             var a = 1;
             var orders = await _mediator.Send(query);
+            var b = 2;
             return Ok(orders);
         }
 
