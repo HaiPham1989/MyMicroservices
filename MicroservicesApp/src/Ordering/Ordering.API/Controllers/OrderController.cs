@@ -30,6 +30,7 @@ namespace Ordering.API.Controllers
             var orders = await _mediator.Send(query);
             var b = 2;
             var c = 3;
+            var d = 3;
             return Ok(orders);
         }
 
