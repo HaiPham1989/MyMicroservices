@@ -24,6 +24,7 @@ namespace Ordering.API.Controllers
             var tung = 1;
             var van = 2;
             var tung222 = 5;
+            var quang = 4;
         }
 
         [HttpGet]
