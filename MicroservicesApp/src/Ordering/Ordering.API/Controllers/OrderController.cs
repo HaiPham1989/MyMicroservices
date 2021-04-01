@@ -19,6 +19,10 @@ namespace Ordering.API.Controllers
         public OrderController(IMediator mediator)
         {
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+            var f = 1;
+            var g = 2;
+            var tung = 1;
+            var van = 2;
         }
 
         [HttpGet]
@@ -32,6 +36,8 @@ namespace Ordering.API.Controllers
             var c = 3;
             var d = 3;
             var e = 3;
+            var f = 3;
+            var t = 3;
             return Ok(orders);
         }
 
