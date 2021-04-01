@@ -22,6 +22,7 @@ namespace Ordering.API.Controllers
             var f = 1;
             var g = 2;
             var tung = 1;
+            var van = 2;
         }
 
         [HttpGet]
